@@ -4,6 +4,8 @@ import Nav from '../../components/Nav';
 import Home from '../../components/Home';
 import News from '../../components/News';
 import Page from '../../components/Page';
+import Events from '../../components/Events';
+import Event from '../../components/Event';
 
 const links = [
   { title: 'Home', path: "/library" },
@@ -12,6 +14,11 @@ const links = [
   { title: 'Events', path: "/library/events" }
 ]
 
+const hub = {
+  name: 'library',
+  tid: 1
+}
+
 const Library = () => (
   <>
     <Nav links={links} />
@@ -19,6 +26,8 @@ const Library = () => (
       <Home hubName="library" path="/" />
       <News path="/news" />
       <Page path="/*" />
+      <Events path="/events" tid={hub.tid} hub={hub.name}/>
+      <Event path="/events/:eventTitle" />
     </Router>
   </>
 );
