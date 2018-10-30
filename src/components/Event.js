@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Query } from 'react-apollo';
 
-import Paragraph from '../components/Paragraph';
 import EVENT_QUERY from '../queries/EventQuery';
+
+// import Paragraph from '../components/Paragraph';
+
+const Paragraph = lazy(() => import('../components/Paragraph'));
 
 const styles = {
   width: '1000px',
@@ -50,6 +53,7 @@ const Event = ({ eventTitle, hub }) => {
 
           return (
             <div style={styles}>
+            <Suspense fallback={'<div>...Loading</div>'}>
 
               {data.route.node.heroImage &&
                 <img style={styles.image} src={data.route.node.heroImage.url} alt={data.route.node.heroImage.alt} />
@@ -68,6 +72,7 @@ const Event = ({ eventTitle, hub }) => {
                   <Paragraph type={item.paragraph.type} values={item.paragraph} key={item.paragraph.id} />
                 )
               }
+              </Suspense>
             </div>
           )
         }}

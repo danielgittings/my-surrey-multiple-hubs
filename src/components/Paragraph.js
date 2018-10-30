@@ -1,9 +1,8 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 
-import BodyCopy from './BodyCopy';
-import Image from './Image';
-import Grid from './Grid';
-
+const BodyCopy = lazy(() => import('./BodyCopy'));
+const Image = lazy(() => import('./Image'));
+const Grid = lazy(() => import('./Grid'));
 
 const PARAGRAPH_MAPPING = {
   body_copy: BodyCopy,
@@ -13,7 +12,11 @@ const PARAGRAPH_MAPPING = {
 
 const Paragraph = ({ type, values }) => {
   const ParagraphComponent = PARAGRAPH_MAPPING[type];
-  return <ParagraphComponent values={values} />;
+  return (
+    <Suspense fallback={'<div>...Loading</div>'}>
+      <ParagraphComponent values={values} />
+    </Suspense>
+  );
 }
 
 export default Paragraph;

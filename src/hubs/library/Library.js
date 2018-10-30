@@ -1,34 +1,29 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import { Router } from '@reach/router';
-import Nav from '../../components/Nav';
-import Home from '../../components/Home';
-import News from '../../components/News';
-import Page from '../../components/Page';
-import Events from '../../components/Events';
-import Event from '../../components/Event';
-
-const links = [
-  { title: 'Home', path: "/library" },
-  { title: 'Page', path: "/library/page" },
-  { title: 'News', path: "/library/news" },
-  { title: 'Events', path: "/library/events" }
-]
+const Nav = lazy(() => import('../../components/Nav'));
+const Home = lazy(() => import('../../components/Home'));
+const News = lazy(() => import('../../components/News'));
+const Page = lazy(() => import('../../components/Page'));
+const Events = lazy(() => import('../../components/Events'));
+const Event = lazy(() => import('../../components/Event'));
 
 const hub = {
   name: 'library',
   tid: 1
 }
 
-const Library = () => (
+const Library = (props) => (
   <>
-    <Nav links={links} />
-    <Router>
-      <Home hubName="library" path="/" />
-      <News path="/news" />
-      <Page path="/*" />
-      <Events path="/events" tid={hub.tid} hub={hub.name}/>
-      <Event path="/events/:eventTitle" />
-    </Router>
+    <Suspense fallback={'<div>...Loading</div>'}>
+      <Nav hubName={hub.name} last={props['*']} />
+      <Router>
+        <Home hubName={hub.name} path="/" />
+        <News path="/news" />
+        <Page path="/*" />
+        <Events path="/events" tid={hub.tid} hub={hub.name}/>
+        <Event path="/events/:eventTitle" />
+      </Router>
+    </Suspense>
   </>
 );
 
