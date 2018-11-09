@@ -2,10 +2,11 @@ import React, { lazy, Suspense } from 'react';
 import { Query } from 'react-apollo';
 
 import EVENT_QUERY from '../queries/EventQuery';
+import PageLoading from './PageLoading';
 
-// import Paragraph from '../components/Paragraph';
+import Paragraph from '../components/Paragraph';
 
-const Paragraph = lazy(() => import('../components/Paragraph'));
+// const Paragraph = lazy(() => import('../components/Paragraph'));
 
 const styles = {
   width: '1000px',
@@ -35,13 +36,7 @@ const Event = ({ eventTitle, hub }) => {
     <Query query={EVENT_QUERY} variables={{ path }}>
         {({ loading, error, data }) => {
 
-          console.log(data);
-
-          if (loading) return (
-            <div style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-              <p style={{ fontSize: '1rem'}}>Loading...</p>
-            </div>
-          );
+          if (loading) return <PageLoading />;
 
           if (error) return <div>Error :(</div>;
 
@@ -53,26 +48,26 @@ const Event = ({ eventTitle, hub }) => {
 
           return (
             <div style={styles}>
-            <Suspense fallback={'<div>...Loading</div>'}>
+              {/* <Suspense fallback={'<div>...Loading</div>'}> */}
 
-              {data.route.node.heroImage &&
-                <img style={styles.image} src={data.route.node.heroImage.url} alt={data.route.node.heroImage.alt} />
-              }
+                {data.route.node.heroImage &&
+                  <img style={styles.image} src={data.route.node.heroImage.url} alt={data.route.node.heroImage.alt} />
+                }
 
-              {data.route.node.title &&
-                <h1 style={styles.heading}>{data.route.node.title}</h1>
-              }
+                {data.route.node.title &&
+                  <h1 style={styles.heading}>{data.route.node.title}</h1>
+                }
 
-              {data.route.node.body &&
-                <div style={styles.intro} dangerouslySetInnerHTML={{ __html: data.route.node.body.value}} />
-              }
+                {data.route.node.body &&
+                  <div style={styles.intro} dangerouslySetInnerHTML={{ __html: data.route.node.body.value}} />
+                }
 
-              {
-                data.route.node.paragraphs && data.route.node.paragraphs.map(item =>
-                  <Paragraph type={item.paragraph.type} values={item.paragraph} key={item.paragraph.id} />
-                )
-              }
-              </Suspense>
+                {
+                  data.route.node.paragraphs && data.route.node.paragraphs.map(item =>
+                    <Paragraph type={item.paragraph.type} values={item.paragraph} key={item.paragraph.id} />
+                  )
+                }
+                {/* </Suspense> */}
             </div>
           )
         }}

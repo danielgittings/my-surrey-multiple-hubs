@@ -2,17 +2,15 @@ import React from 'react';
 import { Link } from '@reach/router';
 
 import { Query } from 'react-apollo';
+
+import NavLoading from './NavLoading';
 import MENU_QUERY from '../queries/MenuQuery';
 
 const Nav = (props) => (
   <Query query={MENU_QUERY}>
   {({ loading, error, data }) => {
 
-    if (loading) return (
-      <div style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <p style={{ fontSize: '1rem'}}>Loading...</p>
-      </div>
-    );
+    if (loading) return <NavLoading />;
 
     if (error) return <div>Error :(</div>;
 
@@ -32,7 +30,8 @@ const Nav = (props) => (
     }
 
     return (
-      <nav style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '30px 0' }}>
+      <>
+      <nav style={{ minHeight: '30px', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '30px 0' }}>
         <ul style={{ width: '1000px', margin: '0 auto 0', display: 'inline-flex'}}>
           <Link to={`/${props.hubName}`}>{navLinks.label}</Link>
           {
@@ -53,6 +52,7 @@ const Nav = (props) => (
           }
         </ul>
       </nav>
+      </>
     )
   }}
 </Query>
