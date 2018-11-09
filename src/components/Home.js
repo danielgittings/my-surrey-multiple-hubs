@@ -1,7 +1,12 @@
-import React from 'react';
+import React from 'react'
+import { Link } from '@reach/router';
 
-const Home = ({ hubName }) => (
-  <h1>This is the {hubName} home</h1>
-);
-
-export default Home;
+export default function Home() {
+  return (
+    <div>
+      <h1>Home</h1>
+      <Link to="/library">Library</Link>
+      <Link to="/wellbeing">Wellbeing</Link>
+    </div>
+  )
+}
