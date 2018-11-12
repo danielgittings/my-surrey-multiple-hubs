@@ -116,24 +116,25 @@ class Help extends Component {
 
                 </div>
 
-                  {(step === 2 && gotAnswers && !gotQuestions) ? data.answers.answers.map(answer => (
+                {(step === 2 && gotAnswers && !gotQuestions) ? data.answers.answers.map(answer => (
                     <div key={answer.uuid}>
                       <h3>{answer.title}</h3>
                       <div dangerouslySetInnerHTML={{ __html: answer.body.processed }} />
                     </div>
-                  )) : null}
+                  )) : null
+                }
 
-                  {/* Step 4 show answers */}
-                  {(step === 3 && gotAnswers) && data.answers.answers.map(answer => (
-                    <div key={answer.uuid}>
-                      <h3>{answer.title}</h3>
-                      <div dangerouslySetInnerHTML={{ __html: answer.body.processed }} />
-                    </div>
-                  ))}
+                {/* Step 4 show answers */}
+                {(step === 3 && gotAnswers) && data.answers.answers.map(answer => (
+                  <div key={answer.uuid}>
+                    <h3>{answer.title}</h3>
+                    <div dangerouslySetInnerHTML={{ __html: answer.body.processed }} />
+                  </div>
+                ))}
 
-                  {(step === 3 && !gotAnswers) && <h3>Couldn't find any answers to that question.</h3>}
+                {(step === 3 && !gotAnswers) && <h3>Couldn't find any answers to that question.</h3>}
 
-                  {(step === 2 && !gotAnswers && !gotQuestions) && <h3>Couldn't find any answers to that question.</h3>}
+                {(step === 2 && !gotAnswers && !gotQuestions) && <h3>Couldn't find any answers to that question.</h3>}
               </div>
             )
           }}
