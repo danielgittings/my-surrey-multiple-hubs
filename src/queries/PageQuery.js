@@ -20,11 +20,18 @@ export const PAGE_QUERY = gql`
                 type: entityBundle
                 ...on ParagraphImage {
                   image: fieldImage {
+                    imageStylePreview: derivative(style: PREVIEW) {
+                      url
+                      height
+                      width
+                    }
                     imageStyleLarge: derivative(style: LARGE) {
                       url
+                      height
                     }
                     imageStyleBanner: derivative(style: BANNER) {
                       url
+                      height
                     }
                     alt
                   }
@@ -49,6 +56,13 @@ export const PAGE_QUERY = gql`
                         image: fieldImage {
                           derivative(style: GRID_THUMBNAIL) {
                             url
+                            height
+                            width
+                          }
+                          imageStylePreview: derivative(style: PREVIEW) {
+                            url
+                            height
+                            width
                           }
                           alt
                         }

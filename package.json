@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@loadable/component": "^4.0.2",
     "@reach/router": "^1.2.1",
     "apollo-boost": "^0.1.18",
     "graphql": "^14.0.2",
     "react": "^16.6.0",
     "react-apollo": "^2.2.4",
+    "react-blur-image-loader": "^0.2.2",
     "react-dom": "^16.6.0",
+    "react-lazy-load": "^3.0.13",
+    "react-lazy-load-image-component": "^1.1.5",
     "react-loading": "^2.0.3",
     "react-scripts": "2.1.0"
   },

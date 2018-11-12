@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Router } from "@reach/router";
-import Library from './hubs/library/Library';
-import Wellbeing from './hubs/wellbeing/Wellbeing';
-import Home from './components/Home';
+import loadable from '@loadable/component';
+
+const Library = loadable(() => import('./hubs/library/Library'));
+const Wellbeing = loadable(() => import('./hubs/wellbeing/Wellbeing'));
+const Home = loadable(() => import('./components/Home'));
 
 class App extends Component {
   render() {

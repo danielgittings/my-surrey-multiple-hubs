@@ -1,10 +1,13 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import { Link } from '@reach/router';
+import loadable from '@loadable/component';
 
 import EVENTS_QUERY from '../queries/EventsQuery';
 
 import EventsListLoading from './EventsListLoading';
+
+const Event = loadable(() => import('../components/Event'));
 
 const styles = {
   width: '1000px',
@@ -40,7 +43,7 @@ const Events = ({ tid, hub }) => (
             <h1 style={styles.heading}>Upcoming events</h1>
             <ul>
               {data.nodeQuery.events
-                .map(event => <li><Link to={`/${hub}${event.url.path}`}>{event.title}</Link></li>)
+                .map(event => <li><Link onMouseOver={() => Event.prefetch()} to={`/${hub}${event.url.path}`}>{event.title}</Link></li>)
               }
             </ul>
           </div>
